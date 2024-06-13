@@ -1,9 +1,67 @@
-<form method="POST">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Login</button>
+{% extends 'food/base.html' %}
 
-
-
-
-</form>
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling */
+        }
+        .full-height {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -50px;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .login-title {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="full-height">
+        <div class="login-container">
+            <h3 class="login-title text-center">Login</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="invalid-feedback">
+                            {{ form.username.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <div class="invalid-feedback">
+                            {{ form.password.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Enter</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
