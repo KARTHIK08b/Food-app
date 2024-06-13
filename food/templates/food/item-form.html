@@ -1,10 +1,67 @@
 {% extends 'food/base.html' %}
 
-
 {% block body %}
-<form method="POST">
-    {% csrf_token %} <!---For security reasons-->
-    {{form}} 
-    <button type="submit">Save</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Add Item</h3>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_item_name">Item Name</label>
+                            {{ form.item_name }}
+                            {% if form.item_name.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.item_name.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_item_desc">Description</label>
+                            {{ form.item_desc }}
+                            {% if form.item_desc.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.item_desc.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_item_price">Price</label>
+                            {{ form.item_price }}
+                            {% if form.item_price.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.item_price.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_item_image">Image</label>
+                            {{ form.item_image }}
+                            {% if form.item_image.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.item_image.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-group {
+        margin-bottom: 1.5rem; /* Adjust margin between form groups */
+    }
+    label {
+        display: block;
+        margin-bottom: 0.5rem; /* Adjust space between label and input */
+        font-weight: bold; /* Optional: Makes labels bold */
+    }
+</style>
+
 {% endblock %}
